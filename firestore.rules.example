@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // CONTOH UNTUK UJI COBA SAJA. Membutuhkan Firebase Authentication.
+    // Sebelum penggunaan nyata, tambahkan login dan aturan akses berbasis user/role.
+    match /transactions/{transactionId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

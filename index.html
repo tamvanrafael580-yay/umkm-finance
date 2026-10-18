@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18395f">
+  <title>UMKM Finance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div><p class="eyebrow">PENCATATAN KEUANGAN USAHA</p><h1>UMKM Finance</h1><p>Catat transaksi, pantau arus kas, dan lihat kinerja usaha dengan mudah.</p></div>
+      <div class="connection"><span id="connectionDot"></span><span id="connectionText">Memeriksa koneksi…</span></div>
+    </header>
+
+    <section class="filters panel">
+      <label>Jenis UMKM
+        <select id="businessFilter">
+          <option value="Semua">Semua UMKM</option>
+          <option>Kantin Kampus</option><option>Es Kacang Merah</option><option>Warung Jajanan</option>
+        </select>
+      </label>
+      <label>Bulan
+        <select id="monthFilter">
+          <option value="Semua">Semua Bulan</option>
+          <option value="2026-09">September 2026</option>
+          <option value="2026-10">Oktober 2026</option>
+          <option value="2026-11">November 2026</option>
+        </select>
+      </label>
+      <button id="refreshBtn" class="button secondary">Muat ulang</button>
+    </section>
+
+    <section class="metrics">
+      <article class="metric"><span>Total Pemasukan</span><strong id="totalIn">Rp0</strong><small>Transaksi pemasukan</small></article>
+      <article class="metric"><span>Total Pengeluaran</span><strong id="totalOut">Rp0</strong><small>Transaksi pengeluaran</small></article>
+      <article class="metric"><span>Selisih Kas</span><strong id="netCash">Rp0</strong><small>Pemasukan kas − pengeluaran kas</small></article>
+      <article class="metric"><span>Jumlah Transaksi</span><strong id="transactionCount">0</strong><small>Data sesuai filter</small></article>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><p class="eyebrow">INPUT DATA</p><h2>Tambah Transaksi</h2></div><span class="pill">Wajib diisi bertanda *</span></div>
+      <form id="transactionForm">
+        <div class="form-grid">
+          <label>Tanggal *<input id="date" type="date" required></label>
+          <label>Jenis UMKM *<select id="business" required><option>Kantin Kampus</option><option>Es Kacang Merah</option><option>Warung Jajanan</option></select></label>
+          <label>Jenis Transaksi *<select id="type" required><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran">Pengeluaran</option></select></label>
+          <label>Kategori *<select id="category" required></select></label>
+          <label class="wide">Keterangan *<input id="description" maxlength="180" placeholder="Contoh: penjualan makanan" required></label>
+          <label>Nominal (Rp) *<input id="amount" type="number" min="1" step="1" placeholder="50000" required></label>
+          <label>Metode Pembayaran<select id="method"><option>Tunai</option><option>Transfer</option><option>QRIS</option><option>Debit</option><option>Kredit / Belum dibayar</option></select></label>
+          <label class="wide">Catatan (opsional)<input id="notes" maxlength="300" placeholder="Catatan tambahan"></label>
+        </div>
+        <div class="form-actions"><button class="button primary" type="submit">＋ Tambah Transaksi</button><p id="formMessage" role="status"></p></div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><p class="eyebrow">DATA TRANSAKSI</p><h2>Riwayat Transaksi</h2><p class="muted">Hapus hanya transaksi yang benar-benar salah. Penghapusan tidak dapat dibatalkan.</p></div>
+      <button id="exportBtn" class="button secondary">Ekspor CSV</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Tanggal</th><th>UMKM</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Metode</th><th class="right">Nominal</th><th>Aksi</th></tr></thead><tbody id="transactionRows"><tr><td colspan="8" class="empty">Belum ada transaksi.</td></tr></tbody></table></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><p class="eyebrow">RINGKASAN</p><h2>Laporan Bulanan</h2><p class="muted">Ringkasan kas berdasarkan tanggal transaksi dan filter di atas.</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Periode</th><th class="right">Pemasukan</th><th class="right">Pengeluaran</th><th class="right">Selisih Kas</th></tr></thead><tbody id="monthlyRows"></tbody></table></div>
+      <p class="notice"><strong>Catatan akuntansi:</strong> ringkasan ini adalah ringkasan arus kas sederhana, bukan laporan laba rugi berbasis akrual. Transaksi kredit, piutang/utang, persediaan, aset tetap, modal, dan prive perlu dicatat dengan klasifikasi khusus sebelum angka digunakan sebagai laporan keuangan resmi.</p>
+    </section>
+    <footer>UMKM Finance · Simpan transaksi secara online melalui Firebase atau gunakan mode demo lokal.</footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body></html>
